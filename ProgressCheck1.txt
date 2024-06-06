@@ -1,0 +1,42 @@
+import java.util.Scanner; //read the input by the user and parse them into primitive data types such as int and default setting 
+
+public class PasswordGenerator {
+    public static void main(String[] args){
+        Scanner scanner = new Scanner (System.in); // setup input    
+        int passwordLength = 0; //initialize the while loop 
+
+        while(!LengthValid(passwordLength)) {
+             System.out.print("Please enter the Length of the password from 8 to 64 inclusively");
+            passwordLength = scanner.nextInt();
+    
+                                    } 
+                                }    
+                            }
+    //Display of mode options from weak to strong 
+    System.out.println("\n Select your password mode!");
+    System.out.println("Alphabets with lower case only!");
+    System.out.println("Alphabets with upper case only!");
+    System.out.println("Alphabets");
+    System.out.println("Number");
+    System.out.println("Alphanumeric - upper case only");
+    System.out.println("Alphanumeric -lower case only"); 
+    System.out.println("Alphanumeric"); 
+    System.out.println("Numbers and special symbols!"); 
+    System.out.println("Alphanumeric + special symbols!");
+    //Initilize the while loop 
+    int passwordMode = 0 
+    //prompt for the Password Mode
+    while (!ModeValid(passwordMode)) {
+        System.out.print("Select the password mode!");
+        passwordMode =  scanner.nextlnt();
+    }
+        scanner.close(); //close the scanner 
+        //Generate and display password
+        System.out.println("Your password is: "+ generatePassword(passwordLength, passwordMode));
+
+//Validate the input for password length 
+
+LengthValid 
+//Validate the input for password mode 
+ModeValid 
+        
