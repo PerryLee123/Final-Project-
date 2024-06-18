@@ -1,0 +1,74 @@
+import java.util.Scanner; //read the input by the user and parse them into primitive data types such as int and default setting Source: https://www.w3schools.com/java/java_user_input.asp
+
+        
+public class PasswordGenerator { //define a class name PasswordGenerator Source: https://www.w3schools.com/java/java_classes.asp 
+    public static void main(String[] args){ //The Entry point of the program.
+        Scanner scanner = new Scanner (System.in); //Setup scanner to read input Source:https://www.w3schools.com/java/java_user_input.asp  
+        int passwordLength = 0; //initialize the while loop 
+
+        //This is a while loop that prompt the user to enter a password length until a valid length between 8 to 64. 
+        while(!lengthValid(passwordLength)) { 
+            System.out.print("Please enter the Length of the password from 8 to 64 inclusively:\n");
+            passwordLength = scanner.nextInt();
+    
+        } 
+        //Display of mode options from weak to strong 
+        System.out.println("\n Select your password mode!");
+        System.out.println("\n For student, we suggest mode 1-2; and mode 3-5 ");
+        System.out.println("(1) Alphabets: Upper and Lower case");
+        System.out.println("(2) Only Number");
+        System.out.println("(3) Alphanumeric - upper and lower case");
+        System.out.println("(4) Numbers and special symbols!"); 
+        System.out.println("(5) Alphanumeric + special symbols!");
+         //Initilize the while loop 
+        int passwordMode = 0;
+         //prompt for the correct Password Mode from 1-5 
+        while(!modeValid(passwordMode)) {
+            System.out.print("Select the password mode:\n");
+            passwordMode =  scanner.nextInt();
+        }
+        scanner.close(); //close the scanner 
+        //Generate and display password
+        System.out.println("Your password is: "+ generatePassword(passwordLength, passwordMode));
+    }
+    //Validate the input for password length. Source: https://www.geeksforgeeks.org/java-lang-boolean-class-java/ 
+    public static boolean lengthValid (int length){ 
+          return length >=8 && length <=64; // return true if it's within 8-64 
+    }
+    //Validate the input for password mode. Source: https://www.geeksforgeeks.org/java-lang-boolean-class-java/
+    public static boolean modeValid( int mode ){ 
+      return mode >=1 && mode <=5; // return true if it's within 1-5 
+    }
+
+    // Method of generating the password.And paramter of length and mode based on user's input 
+    public static String generatePassword(int length, int mode) {  
+        
+        //Character groups, four strings are defined 
+        String uppercase= "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String lowercase= "abcdefghijklmnopqrstuvwxyz";
+        String Number= "1234567890";
+        String Specialsymbols= "!@#$%^&*()";
+        
+        //Initialize Character pool and password. Create an empty String that holds characters to generate the password.  
+        String characterPool= " "; 
+        StringBuilder temp = new StringBuilder(); //initializes an empty StringBuilder named temp to build and store the generated password. Source: https://www.geeksforgeeks.org/stringbuilder-class-in-java-with-examples/
+        
+         //populate character pool based on selected mode 
+        switch(mode) {
+            case 1:characterPool = uppercase + lowercase; break;
+            case 2:characterPool = Number; break;
+            case 3:characterPool = uppercase + lowercase + Number; break; 
+            case 4:characterPool = Number + Specialsymbols; break; 
+            case 5:characterPool = uppercase +lowercase+Number+ Specialsymbols; break; 
+        }
+        //"Creating a List" by converting character pool to a character array so that individual characters can be easily accessed 
+        char[] charArray = characterPool.toCharArray(); 
+        
+        for (int i=0; i<length;i++){ //create a for loop to run "length" times to ensure the password is in the specified length 
+         // In each iteration, a random character from "charArry " to temp 
+            temp.append(charArray[(int)(Math.random() * charArray.length)]); 
+        }//Generate password by picking random characters witihin the range of "charArray"
+        return temp.toString(); 
+    // Convert stringBuilder temp to a String and returned as a generated password 
+    }
+}
